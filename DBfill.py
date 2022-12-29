@@ -13,21 +13,18 @@ import re
 import pandas as pd
 
 
-
-
 BD=[]
 
-NombreDeBaseDatos = "PROCESO.xlsx"
+NombreDeBaseDatos = "LINKS_GRUPOS.xlsx"
 dfgrupos = pd.read_excel(NombreDeBaseDatos, sheet_name='Hoja1', engine='openpyxl')
 tamaño_dfgrupos =dfgrupos.shape
 links = dfgrupos["LINKS"]
 ident = dfgrupos["ID"]
 
-for j in range(0,len(links),1):
+for j in range(0,3): #len(links)
     
     x=ident[j]
     
-       
     try:
         print("'"+links[j]+"'")
         r = requests.get(links[j], verify=False)
@@ -88,9 +85,9 @@ for j in range(0,len(links),1):
         conn=psycopg2.connect(
             host="localhost",
             user="postgres",
-            password="Millos15..",
+            password="poner contraseña",
             database="postgres",
-            port="5435"
+            port="5432"
         )
         
         cur = conn.cursor()

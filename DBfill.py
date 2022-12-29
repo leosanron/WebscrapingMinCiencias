@@ -11,6 +11,10 @@ import requests
 import psycopg2
 import re
 import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
+warnings.warn('InsecureRequestWarning')
+warnings.warn('Do not show this message')
 
 
 BD=[]
@@ -21,7 +25,7 @@ tamaño_dfgrupos =dfgrupos.shape
 links = dfgrupos["LINKS"]
 ident = dfgrupos["ID"]
 
-for j in range(0,3): #len(links)
+for j in range(0,2): #len(links)
     
     x=ident[j]
     
@@ -85,7 +89,7 @@ for j in range(0,3): #len(links)
         conn=psycopg2.connect(
             host="localhost",
             user="postgres",
-            password="poner contraseña",
+            password="poner clave",
             database="postgres",
             port="5432"
         )

@@ -25,12 +25,12 @@ tamaño_dfgrupos =dfgrupos.shape
 links = dfgrupos["LINKS"]
 ident = dfgrupos["ID"]
 
-for j in range(0,2): #len(links)
+for j in range(5004,5007): #len(links)
     
     x=ident[j]
     
     try:
-        print("'"+links[j]+"'")
+        print("link numero ",j,"'",links[j],"'")
         r = requests.get(links[j], verify=False)
         soup = BeautifulSoup(r.text, 'lxml')
         
@@ -89,7 +89,7 @@ for j in range(0,2): #len(links)
         conn=psycopg2.connect(
             host="localhost",
             user="postgres",
-            password="poner clave",
+            password="Piraka7895123",
             database="postgres",
             port="5432"
         )
@@ -110,4 +110,5 @@ for j in range(0,2): #len(links)
         
         
         print("Error en ", j)
-    
+
+# READ JSON ONLINE https://jsoneditoronline.org/#left=local.tuzohe&right=local.moyefe

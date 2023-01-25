@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov 24 23:15:45 2022
-
 @author: Maloa
 """
 
@@ -25,7 +24,7 @@ tamaño_dfgrupos =dfgrupos.shape
 links = dfgrupos["LINKS"]
 ident = dfgrupos["ID"]
 
-for j in range(5004,5007): #len(links)
+for j in range(5301,6000): #len(links)
     
     x=ident[j]
     
@@ -95,8 +94,6 @@ for j in range(5004,5007): #len(links)
         )
         
         cur = conn.cursor()
-        
-        #cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
         
         cur.execute("INSERT INTO ctei (id,grupos) VALUES ("+str(x)+",'"+  json +"')")
         

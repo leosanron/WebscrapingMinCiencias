@@ -1,0 +1,20 @@
+select * from ctei
+where id between 4000 and 4010;
+
+
+ALTER TABLE ctei 
+ALTER COLUMN grupos 
+TYPE json USING grupos::json;
+
+
+select * from ctei
+where grupos like '%Gobierno%'
+and id between 4000 and 4050
+limit 10;
+
+
+
+select grupos -> 'G' ->> 'Nombre' from ctei
+where  grupos -> 'G' ->> 'Nombre' like '%Gobierno%'
+and id between 4000 and 4050
+limit 10;

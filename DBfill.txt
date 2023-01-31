@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov 24 23:15:45 2022
+
 @author: Maloa
 """
 
@@ -9,11 +10,13 @@ import pandas as pd
 import requests
 import psycopg2
 import re
-import pandas as pd
+import time
+
 import warnings
 warnings.filterwarnings('ignore')
 warnings.warn('InsecureRequestWarning')
 warnings.warn('Do not show this message')
+
 
 
 BD=[]
@@ -24,12 +27,14 @@ tamaño_dfgrupos =dfgrupos.shape
 links = dfgrupos["LINKS"]
 ident = dfgrupos["ID"]
 
-for j in range(3,4): #len(links)
+for j in range(0,len(links),1):
     
     x=ident[j]
+    link=links[j]
     
     try:
-        print("link numero ",j,"'",links[j],"'") 
+        
+        print("Se esta leyendo el link numero ",j,"\n'",links[j],"'")
         r = requests.get(links[j], verify=False)
         soup = BeautifulSoup(r.text, 'lxml')
         
@@ -52,7 +57,7 @@ for j in range(3,4): #len(links)
         json = json[:-1]+'},'
         
         for i in range (1,85,1):
-          print("---------------------. ",i)
+          print("--------- Lectura de la tabla numero ------------. ",i)
           if (i==4 or i==26 or i==45 or i==46 or i==50 or i==76 or i==80):
               pass
           elif(i<13):
@@ -86,18 +91,19 @@ for j in range(3,4): #len(links)
         ####    BASES DE DATOS ###
         
         conn=psycopg2.connect(
-            host="localhost",
-            user="postgres",
-            password="Piraka7895123",
-            database="postgres",
-            port="5432"
-        )
+           host="localhost",
+           user="postgres",
+           password="Millos15..",
+           database="postgres",
+           port="5435"
+       )
         
         cur = conn.cursor()
         
-        #cur.execute("INSERT INTO ctei (id,grupos) VALUES ("+str(x)+",'"+  json +"')")
-        #cur.execute("INSERT INTO mc (id,link,info) VALUES ("+str(x)+", wwwwww ,'"+  json +"')")
+        #cur.execute("create table mc (id INT PRIMARY KEY,info jsonb not NULL,link VARCHAR);")  Crea la base de datos en postgresql.
+        
         cur.execute("insert into mc (id,info,link) values ("+str(x)+",'"+json+"','"+str(link)+"')")
+       
         
         conn.commit()
         cur.close()
@@ -106,6 +112,6 @@ for j in range(3,4): #len(links)
         
     except:
         
+        
         print("Error en ", j)
-
-# READ JSON ONLINE https://jsoneditoronline.org/#left=local.tuzohe&right=local.moyefe
+    

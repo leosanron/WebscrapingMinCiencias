@@ -24,9 +24,10 @@ tamaño_dfgrupos =dfgrupos.shape
 links = dfgrupos["LINKS"]
 ident = dfgrupos["ID"]
 
-for j in range(3,4): #len(links)
+for j in range(0,5): #len(links)
     
     x=ident[j]
+    link=links[j]
     
     try:
         print("link numero ",j,"'",links[j],"'") 
